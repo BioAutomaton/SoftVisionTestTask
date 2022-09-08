@@ -17,17 +17,17 @@ class GameBase(BaseModel):
         orm_mode = True
 
 
-class UserGameConnection(BaseModel):
-    game_id: int
-    user_id: int
-
-
 class Game(GameBase):
     id: int
 
 
 class User(UserBase):
     id: int
+
+
+class UserGameConnectionSchema(BaseModel):
+    game_id: int
+    user_id: int
 
 
 class GameSchema(Game):
