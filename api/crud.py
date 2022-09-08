@@ -15,7 +15,7 @@ def get_users(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.User).offset(skip).limit(limit).all()
 
 
-def create_user(db: Session, user: schemas.UserCreate):
+def create_user(db: Session, user: schemas.UserBase):
     db_user = models.User(email=user.email, name=user.name, age=user.age)
     db.add(db_user)
     db.commit()

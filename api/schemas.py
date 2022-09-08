@@ -2,7 +2,6 @@ from pydantic import BaseModel
 
 
 class UserBase(BaseModel):
-    id: int
     email: str
     name: str
     age: int
@@ -12,24 +11,28 @@ class UserBase(BaseModel):
 
 
 class GameBase(BaseModel):
-    id: int
     name: str
 
     class Config:
         orm_mode = True
 
 
-class UserSchema(UserBase):
-    games: list[GameBase]
+class UserGameConnection(BaseModel):
+    game_id: int
+    user_id: int
 
 
-class GameSchema(GameBase):
-    users: list[UserBase]
+class Game(GameBase):
+    id: int
 
 
-class UserCreate(UserBase):
-    pass
+class User(UserBase):
+    id: int
 
 
-class GameCreate(GameBase):
-    pass
+class GameSchema(Game):
+    users: list[User]
+
+
+class UserSchema(User):
+    games: list[Game]
