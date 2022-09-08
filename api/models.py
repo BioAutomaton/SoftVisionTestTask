@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String, Table
 from sqlalchemy.orm import relationship
 
 from .database import Base
@@ -15,9 +15,9 @@ class User(Base):
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True, index=True)
-    age = Column(Integer)
-    name = Column(String(120))
     email = Column(String, unique=True, index=True)
+    name = Column(String(120))
+    age = Column(Integer)
 
     games = relationship('Game', secondary=UserGame, back_populates='users')
 
