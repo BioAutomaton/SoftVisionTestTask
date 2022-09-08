@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 
 from .database import Base
 
-UserGame = Table(
+UserGameConnection = Table(
     'UserGame',
     Base.metadata,
     Column('user_id', ForeignKey('users.id'), primary_key=True),
@@ -19,7 +19,7 @@ class User(Base):
     name = Column(String(120))
     age = Column(Integer)
 
-    games = relationship('Game', secondary=UserGame, back_populates='users')
+    games = relationship('Game', secondary=UserGameConnection, back_populates='users')
 
 
 class Game(Base):
@@ -28,4 +28,4 @@ class Game(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(120))
 
-    users = relationship('User', secondary=UserGame, back_populates='games')
+    users = relationship('User', secondary=UserGameConnection, back_populates='games')
